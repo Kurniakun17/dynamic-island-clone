@@ -1,12 +1,19 @@
 import { motion, useAnimate } from 'framer-motion';
 import { Bell, BellOff } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 const Framer = () => {
   const [scope, animate] = useAnimate();
-
+  const ringRef = useRef(null);
+  const [ringDisabled, setRingDisabled] = useState(false);
   const onClickHandler = async (type) => {
     if (type === 'ring') {
       // Bell animation
+      setRingDisabled(true);
+      setTimeout(() => {
+        setRingDisabled(false);
+      }, 4800);
+
       animate([
         [
           '.bell',
@@ -66,6 +73,7 @@ const Framer = () => {
           { at: 2.7, duration: 0.3 },
         ],
 
+        // Bell reappear (need to be fix)
         [
           '.bell',
           {
@@ -73,7 +81,7 @@ const Framer = () => {
             blur: 0,
             x: 0,
           },
-          { duration: 0.1, at: 2.7 },
+          { duration: 0.2, at: 2.7 },
         ],
 
         [
@@ -83,6 +91,7 @@ const Framer = () => {
           },
           { duration: 1 },
         ],
+
         [
           '.bell',
           {
@@ -106,8 +115,6 @@ const Framer = () => {
         ],
         ['.ring-text', { scale: 1, blur: 0 }, { duration: 0.2, at: 2.7 }],
         ['.ring-text', { scale: 0, blur: 4 }, { at: 4.5, duration: 0.2 }],
-
-        // finished at 2.4
       ]);
 
       // Silent Container animation
@@ -123,10 +130,53 @@ const Framer = () => {
         ['.base', { width: 240 }, { duration: 0.5 }],
         ['.base', { width: 300 }, { delay: 0.8, duration: 0.5 }],
         ['.base', { width: 240 }, { at: 2.7, duration: 0.5 }],
-        ['.base', { width: 200 }, { at: 4.5, duration: 0.5 }],
+        ['.base', { width: 220 }, { at: 4.5, duration: 0.5 }],
       ]);
     } else if (type === 'idle') {
-      // controls.start({ scale: 0.2, transition: { duration: 3 } });
+      setRingDisabled(true);
+
+      setTimeout(() => {
+        setRingDisabled(false);
+      }, 700);
+      animate([
+        ['.base', { width: 220 }, { duration: 0.4, type: 'inertia' }],
+        [
+          '.bell',
+          {
+            opacity: 0,
+            blur: 4,
+            x: 0,
+          },
+          { duration: 0.4, type: 'inertia', at: '<' },
+        ],
+        [
+          '.ring-text',
+          { scale: 0, blur: 4 },
+          { at: '<', duration: 0.2, type: 'inertia' },
+        ],
+        [
+          '.silent-text',
+          { scale: 0, blur: 4 },
+          { at: '<', duration: 0.2, type: 'inertia' },
+        ],
+        [
+          '.silent',
+          { scale: 0, opacity: 0, blur: 4 },
+          { at: '<', duration: 0.3 },
+        ],
+        ['.silent-container', { opacity: 0 }, { at: '<', duration: 0.1 }],
+        ['.silent', { scale: 1 }, { at: 0.3, duration: 0.1 }],
+        [
+          '.silent-container',
+          { width: 0 },
+          { at: 0.5, duration: 0.1, type: 'inertia' },
+        ],
+        [
+          '.silent-container',
+          { opacity: 1 },
+          { at: 0.6, duration: 0.1, type: 'inertia' },
+        ],
+      ]);
     }
   };
 
@@ -170,14 +220,15 @@ const Framer = () => {
       <div className="flex gap-3">
         <button
           onClick={() => onClickHandler('idle')}
-          className="rounded-lg bg-white text-black hover:bg-slate-700 border border-slate-400 p-2 px-6"
+          className="rounded-full bg-white hover:bg-slate-300 duration-300 font-semibold text-black border border-slate-400 p-2 px-6"
         >
           Idle
         </button>
 
         <button
           onClick={() => onClickHandler('ring')}
-          className="rounded-lg bg-white text-black hover:bg-slate-700 border border-slate-400 p-2 px-6"
+          disabled={ringDisabled}
+          className="rounded-full bg-white disabled:bg-slate-400 hover:bg-slate-300 duration-300 font-semibold text-black border border-slate-400 p-2 px-6"
         >
           Ring
         </button>
