@@ -20,70 +20,110 @@ const Framer = () => {
             duration: 0.2,
           },
         ],
+        // pause bell
         [
           '.bell',
           {
             scale: 1,
           },
-          { duration: 0.7 },
+          { duration: 1.3 },
+        ],
+
+        // bell finished at 1.5 and starts to fading out
+        [
+          '.bell',
+          {
+            opacity: 0,
+            blur: 4,
+            x: 24,
+          },
+          { duration: 0.1, at: '-0.1' },
+        ],
+
+        // Set bell position to default
+        [
+          '.bell',
+          {
+            x: 24,
+          },
+          { duration: 0.1, at: 1.9 },
+        ],
+
+        // Silent appear
+        ['.silent', { opacity: 1, blur: 4, x: 24 }, { duration: 0.2, at: 1.4 }],
+
+        // Silent starts to shake
+        [
+          '.silent',
+          { rotate: [0, -30, 20, -5, 0], blur: 0 },
+          { duration: 0.8, at: 1.4, type: 'inertia' },
+        ],
+
+        // Silent dissapear
+        [
+          '.silent',
+          { scale: 0, opacity: 0, blur: 4 },
+          { at: 2.7, duration: 0.3 },
+        ],
+
+        [
+          '.bell',
+          {
+            opacity: 1,
+            blur: 0,
+            x: 0,
+          },
+          { duration: 0.1, at: 2.7 },
+        ],
+
+        [
+          '.bell',
+          {
+            rotate: [0, 20, -24, 12, -10, 0],
+          },
+          { duration: 1 },
         ],
         [
           '.bell',
           {
             opacity: 0,
-            x: 24,
-          },
-          { duration: 0.1 },
-        ],
-        [
-          '.bell',
-          {
-            x: 0,
             blur: 4,
           },
-          { duration: 0.1, at: 1.4 },
+          { duration: 0.3, at: 4.5 },
         ],
-        ['.silent', { opacity: 1, blur: 4, x: 24 }, { duration: 0.2, at: 0.9 }],
-        [
-          '.silent',
-          { rotate: [0, -30, 20, -5, 0], blur: 0 },
-          { duration: 0.8, at: 0.9, type: 'inertia' },
-        ],
-        [
-          '.silent',
-          { scale: 0, opacity: 0, blur: 4 },
-          { at: 2.2, duration: 0.3 },
-        ],
-
-        ['.silent', { scale: 1, x: 0 }, { at: 2.5, duration: 0.01 }],
+        ['.silent', { scale: 1, x: 0 }, { at: 3, duration: 0.01 }],
       ]);
 
       // Text animation
       animate([
         ['.ring-text', { scale: 1, blur: 0 }, { duration: 0.2 }],
-        ['.ring-text', { scale: 0, blur: 4 }, { at: 0.9, duration: 0.2 }],
-        ['.silent-text', { scale: 1, blur: 0 }, { at: 0.9, duration: 0.2 }],
+        ['.ring-text', { scale: 0, blur: 4 }, { at: 1.4, duration: 0.2 }],
+        ['.silent-text', { scale: 1, blur: 0 }, { at: 1.4, duration: 0.2 }],
         [
           '.silent-text',
           { scale: 0, blur: 4 },
-          { delay: 1.1, at: 1.1, duration: 0.2 },
+          { delay: 1.1, at: 1.6, duration: 0.2 },
         ],
+        ['.ring-text', { scale: 1, blur: 0 }, { duration: 0.2, at: 2.7 }],
+        ['.ring-text', { scale: 0, blur: 4 }, { at: 4.5, duration: 0.2 }],
+
         // finished at 2.4
       ]);
 
       // Silent Container animation
       animate([
-        ['.silent-container', { width: 72 }, { at: 0.9, duration: 0.3 }],
-        ['.silent-container', { opacity: 0 }, { at: 2.2, duration: 0.1 }],
-        ['.silent-container', { width: 0 }, { at: 2.4, duration: 0.1 }],
-        ['.silent-container', { opacity: 1 }, { at: 2.5, duration: 0.1 }],
+        ['.silent-container', { width: 72 }, { at: 1.4, duration: 0.3 }],
+        ['.silent-container', { opacity: 0 }, { at: 2.7, duration: 0.1 }],
+        ['.silent-container', { width: 0 }, { at: 2.9, duration: 0.1 }],
+        ['.silent-container', { opacity: 1 }, { at: 3, duration: 0.1 }],
       ]);
 
       // dynamic island animation
       animate([
         ['.base', { width: 240 }, { duration: 0.5 }],
-        ['.base', { width: 280 }, { delay: 0.3, duration: 0.5 }],
-        ['.base', { width: 200 }, { at: 2.2, duration: 0.5 }],
+        ['.base', { width: 300 }, { delay: 0.8, duration: 0.5 }],
+        ['.base', { width: 240 }, { at: 2.7, duration: 0.5 }],
+        ['.base', { width: 200 }, { at: 4.5, duration: 0.5 }],
       ]);
     } else if (type === 'idle') {
       // controls.start({ scale: 0.2, transition: { duration: 3 } });
@@ -94,7 +134,7 @@ const Framer = () => {
     <div className="flex flex-col items-center justify-center gap-8">
       <div ref={scope}>
         <motion.div
-          style={{ width: 200 }}
+          style={{ width: 220 }}
           className="base relative bg-black flex items-center px-4 rounded-full h-12"
         >
           {/* Ring */}
@@ -119,6 +159,8 @@ const Framer = () => {
               <p className="text-red-500 font-semibold">Silent</p>
             </motion.div>
           </>
+
+          <></>
         </motion.div>
 
         <motion.div></motion.div>

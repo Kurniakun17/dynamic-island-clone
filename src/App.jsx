@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const App = () => {
   return (
     <>
-      <div className="bg-white min-h-screen p-12 grid place-items-center">
+      <div className="bg-slate-800 min-h-screen p-12 grid place-items-center">
         <Routes>
           <Route path="/" element={<Framer />} />
           <Route path="/manual" element={<Manual />} />
