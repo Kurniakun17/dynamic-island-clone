@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Framer from './screen/Framer';
 import Manual from './screen/Manual';
 import { motion } from 'framer-motion';
+import Timer from './screen/Timer';
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <div className="bg-slate-800 min-h-screen p-12 grid place-items-center">
         <Routes>
           <Route path="/" element={<Framer />} />
+          <Route path="/timer" element={<Timer />} />
           <Route path="/manual" element={<Manual />} />
         </Routes>
       </div>

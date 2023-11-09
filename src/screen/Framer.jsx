@@ -1,10 +1,9 @@
 import { motion, useAnimate } from 'framer-motion';
 import { Bell, BellOff } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 const Framer = () => {
   const [scope, animate] = useAnimate();
-  const ringRef = useRef(null);
   const [ringDisabled, setRingDisabled] = useState(false);
   const onClickHandler = async (type) => {
     if (type === 'ring') {
@@ -113,7 +112,7 @@ const Framer = () => {
           { scale: 0, blur: 4 },
           { delay: 1.1, at: 1.6, duration: 0.2 },
         ],
-        ['.ring-text', { scale: 1, blur: 0 }, { duration: 0.2, at: 2.7 }],
+        ['.ring-text', { scale: 1, blur: 0 }, { at: 2.7, duration: 0.2 }],
         ['.ring-text', { scale: 0, blur: 4 }, { at: 4.5, duration: 0.2 }],
       ]);
 
@@ -138,6 +137,7 @@ const Framer = () => {
       setTimeout(() => {
         setRingDisabled(false);
       }, 700);
+
       animate([
         ['.base', { width: 220 }, { duration: 0.4, type: 'inertia' }],
         [
