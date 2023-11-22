@@ -10,7 +10,7 @@ const App = () => {
     <>
       <div className="bg-gray-100 min-h-screen p-12 grid place-items-center">
         <div className="relative w-full">
-          <h1 className="absolute left-1/2 -top-32 -translate-x-1/2  font-bold text-4xl">
+          <h1 className="absolute left-1/2 -top-32 -translate-x-1/2  font-bold text-3xl">
             Dynamic Island
           </h1>
           <Routes>

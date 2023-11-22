@@ -157,7 +157,7 @@ const Framer = () => {
       }, 700);
 
       animate([
-        ['.base', { width: 220, scale: 1 }, { duration: 0.4, type: 'inertia' }],
+        ['.base', { width: 220, scale: 1 }, { duration: 0.8, type: 'spring' }],
         [
           '.bell',
           {
