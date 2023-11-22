@@ -87,9 +87,16 @@ const Timer = ({ state }) => {
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -10, opacity: 0 }}
-                className="tens text-orange-400 w-[10.5px]"
+                className={`tens text-orange-400  ${
+                  tens === '1'
+                    ? 'w-[8px]'
+                    : tens === '4'
+                    ? 'w-[12px]'
+                    : 'w-[11.5px]'
+                }
+                `}
               >
-                {tens.toString()[0]}
+                {' ' + tens.toString()[0]}
               </motion.p>
 
               <motion.p
