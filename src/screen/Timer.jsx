@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { Pause, Play } from 'lucide-react';
+import { Pause, Play, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
-const Timer = ({ state }) => {
+const Timer = ({ state, onChangeSet }) => {
   const [time, setTime] = useState(0);
   const [pause, setPause] = useState(false);
 
@@ -53,29 +53,50 @@ const Timer = ({ state }) => {
     <div className="w-full ">
       <AnimatePresence mode="wait">
         <div className="flex items-center text-xl text-white font-semibold justify-between  ">
-          <button
-            onClick={onToggleTimer}
-            className="h-[36px] w-[36px] relative bg-yellow-500/40 text-black rounded-full"
-          >
-            <motion.div
-              key={`pause ${pause}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+          <div className="flex gap-1">
+            <button
+              onClick={onToggleTimer}
+              className="h-[32px] w-[32px] relative bg-orange-400/20 text-black rounded-full"
             >
-              {pause ? (
-                <Play
+              <motion.div
+                key={`pause ${pause}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {pause ? (
+                  <Play
+                    size={16}
+                    className="play text-orange-500 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+                  />
+                ) : (
+                  <Pause
+                    size={16}
+                    className="pause text-orange-500 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+                  />
+                )}
+              </motion.div>
+            </button>
+
+            <button
+              onClick={() => {
+                onChangeSet('idle');
+              }}
+              className="h-[32px] w-[32px] relative bg-gray-300/20 text-black rounded-full"
+            >
+              <motion.div
+                key={`close`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <X
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 text-gray-300 -translate-y-1/2"
                   size={18}
-                  className="play text-yellow-500 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
                 />
-              ) : (
-                <Pause
-                  size={18}
-                  className="pause text-yellow-500 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
-                />
-              )}
-            </motion.div>
-          </button>
+              </motion.div>
+            </button>
+          </div>
           <div className="flex items-end gap-1">
             <p className="text-[10px] leading-4  text-orange-400 pb-0.5 ">
               Timer

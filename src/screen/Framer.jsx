@@ -197,7 +197,11 @@ const Framer = () => {
       ]);
     }
   };
-  console.log(`from parents ${state}`);
+
+  function onChangeSet(type) {
+    onClickHandler(type);
+    setState(type);
+  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-12">
@@ -237,7 +241,7 @@ const Framer = () => {
               animate={{ scale: 1 }}
               className="w-full"
             >
-              <Timer state={state} />
+              <Timer state={state} onChangeSet={onChangeSet} />
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -250,7 +254,7 @@ const Framer = () => {
             setState('idle');
             onClickHandler('idle');
           }}
-          className="rounded-full bg-white hover:bg-slate-300 duration-300 font-semibold text-black border border-slate-400 p-2 px-6"
+          className="text-white bg-gray-500/60 hover:scale-[0.98] focus:scale-[0.9] duration-300 font-semibold px-8 py-2 pb-3 text-md rounded-full"
         >
           Idle
         </button>
@@ -261,7 +265,7 @@ const Framer = () => {
             onClickHandler('ring');
           }}
           disabled={ringDisabled}
-          className="rounded-full bg-white disabled:bg-slate-400 hover:bg-slate-300 duration-300 font-semibold text-black border border-slate-400 p-2 px-6"
+          className="text-white bg-gray-500/60 hover:scale-[0.98] focus:scale-[0.9] duration-300 font-semibold px-8 py-2 pb-3 text-md rounded-full"
         >
           Ring
         </button>
@@ -271,7 +275,7 @@ const Framer = () => {
             onClickHandler('timer');
           }}
           disabled={ringDisabled}
-          className="rounded-full bg-white disabled:bg-slate-400 hover:bg-slate-300 duration-300 font-semibold text-black border border-slate-400 p-2 px-6"
+          className="text-white bg-gray-500/60 hover:scale-[0.98] focus:scale-[0.9] duration-300 font-semibold px-8 py-2 pb-3  text-md rounded-full"
         >
           Timer
         </button>
