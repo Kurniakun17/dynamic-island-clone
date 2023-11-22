@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+li {
+  color: var(--background);
+  display: block;
+  transform-origin: -20px 50%;
+}
+
+/* * {
+  @apply duration-300;
+} */
+
 /* .text-bell-ring {
   display: block;
   animation: text-ring 4s;

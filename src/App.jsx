@@ -3,14 +3,16 @@ import Framer from './screen/Framer';
 import Manual from './screen/Manual';
 import { motion } from 'framer-motion';
 import Timer from './screen/Timer';
+import Practice from './screen/Practice';
 
 const App = () => {
   return (
     <>
-      <div className="bg-slate-800 min-h-screen p-12 grid place-items-center">
+      <div className="bg-zinc-800 min-h-screen p-12 grid place-items-center">
         <Routes>
           <Route path="/" element={<Framer />} />
           <Route path="/timer" element={<Timer />} />
+          <Route path="/practice" element={<Practice />} />
           <Route path="/manual" element={<Manual />} />
         </Routes>
       </div>
